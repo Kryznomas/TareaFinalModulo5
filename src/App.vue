@@ -1,13 +1,37 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <b-jumbotron header="VueJs">
+    <p>Trabajo Evaluacion Final Módulo 5</p>
+    </b-jumbotron>
+    <Form></Form>
+    <Lista></Lista>
+    <Calc></Calc>
   </div>
 </template>
 
+<script>
+// @ is an alias to /src
+import Form from "@/components/Form.vue";
+import Lista from "@/components/Lista.vue";
+import Calc from "@/components/Calc.vue";
+import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+
+export default {
+  name: "App",
+  components: {
+    Form,
+    Lista,
+    Calc
+  },
+  computed: {
+    ...mapState(["productos", "totalPagado", "totalPorPagar", "total"])
+  },
+  methods: {
+    ...mapMutations(["ADD_PRODUCT", "DELETE_PRODUCT", "PAY_PRODUCT"]),
+  }
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -15,18 +39,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
